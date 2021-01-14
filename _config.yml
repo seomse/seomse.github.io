@@ -126,7 +126,7 @@ defaults:
       toc: true         # Display TOC column in posts.
       breadcrumb:
         -
-          label: Posts
+          label: posts
           url: /
   -
     scope:
