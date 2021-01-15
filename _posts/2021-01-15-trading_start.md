@@ -1,9 +1,9 @@
 ---
-title: 자동매매 ETF 벡테스팅 (레버리지, 인버스)
+title: 자동 매매 연구
 author: macle
-date: 2021-01-15 13:30:00 +0800
-categories: [trading]
-tags: [stock,etf,bitcoin,macle]
+date: 2021-01-15 12:30:00
+categories: [자동매매]
+tags: [주식,ETF,비트코인,선물.macle]
 ---
 
 # 연구 방향
@@ -13,6 +13,8 @@ tags: [stock,etf,bitcoin,macle]
 
 - 자산분배까지 되는게 완전한 자동화와 많은 자산을 관리하는 방법이라고 믿고 시작하였습니다.
 - 국내 주식시장을 시작으로 비트코인, 선물, 해외 개별종목까지 자동매매 시스템을 구착하려 합니다.
+
+- 양방향 매매가 가능한 부분은 양방향 매매로, 개별종목 처럼 단방향 매매만 해야하는 부분은 매수와 매도만 합니다.
 
 - 전용 회선 및 서버장비, 운영비용등의 한계로 인해서 초기에는 스켈핑 연구는 제외 합니다.
 
@@ -29,4 +31,4 @@ tags: [stock,etf,bitcoin,macle]
 
 - 데이터 논리 구조는 아래와 같습니다.
 
-![데이터 논리구조][https://raw.githubusercontent.com/macle86/macle86.github.io/master/assets/img/data/data_l.png]
+![데이터 논리구조](https://raw.githubusercontent.com/macle86/macle86.github.io/master/assets/img/data/data_l.png)
