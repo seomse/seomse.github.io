@@ -8,7 +8,7 @@ tags: [주식,ETF,macle]
 
 # 개요
 
-- 연구는 섬세한 사람들의 오픈소스 프로젝트를 응요하여 사용하였습니다.
+- 연구는 섬세한 사람들의 오픈소스 프로젝트를 응용하여 사용하였습니다.
    - https://github.com/seomse/seomse-stock
    - https://github.com/seomse/seomse-trading
 
