@@ -1,7 +1,7 @@
 ---
 title: 자동매매 ETF 벡테스팅 (레버리지, 인버스)
 author: macle
-date: 2021-01-15 22:30:00
+date: 2021-01-15 22:30:00 +0800
 categories: [trading]
 tags: [stock,etf,bitcoin,macle]
 ---
