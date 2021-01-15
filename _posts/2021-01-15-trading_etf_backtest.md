@@ -1,7 +1,7 @@
 ---
 title: 자동매매 ETF 벡테스팅 (레버리지, 인버스)
 author: macle
-date: 2021-01-15 15:30:00 +0800
+date: 2021-01-15 22:30:00 +0800
 categories: [자동매매]
 tags: [주식,ETF,macle]
 ---
