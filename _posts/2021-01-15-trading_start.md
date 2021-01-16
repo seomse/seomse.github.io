@@ -3,7 +3,7 @@ title: 자동 매매 연구
 author: macle
 date: 2021-01-15 21:30:00 +0800
 categories: [자동매매]
-tags: [주식,ETF,비트코인,선물.macle]
+tags: [주식,ETF,비트코인,선물,macle]
 ---
 
 # 연구 방향
