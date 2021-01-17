@@ -6,6 +6,9 @@ categories: [자동매매]
 tags: [주식,ETF,macle]
 ---
 
+- 작성자 : macle
+- 작성자 블로그: https://macle.dev
+
 # 개요
 
 - 연구는 섬세한 사람들의 오픈소스 프로젝트를 응용하여 사용하였습니다.

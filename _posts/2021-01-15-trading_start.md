@@ -5,6 +5,8 @@ date: 2021-01-15 21:30:00 +0800
 categories: [자동매매]
 tags: [주식,ETF,비트코인,선물,macle]
 ---
+- 작성자 : macle
+- 작성자 블로그: https://macle.dev
 
 # 연구 방향
 
