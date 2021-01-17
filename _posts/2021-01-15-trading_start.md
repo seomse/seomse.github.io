@@ -7,6 +7,7 @@ tags: [주식,ETF,비트코인,선물,macle]
 ---
 - 작성자 : macle
 - 작성자 블로그: https://macle.dev
+- 원본경로: https://macle.dev/posts/trading_start/
 
 # 연구 방향
 

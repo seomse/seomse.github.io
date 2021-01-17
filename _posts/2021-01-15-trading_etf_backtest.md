@@ -8,6 +8,7 @@ tags: [주식,ETF,macle]
 
 - 작성자 : macle
 - 작성자 블로그: https://macle.dev
+- 원본경로: https://macle.dev/posts/trading_etf_backtest/
 
 # 개요
 
