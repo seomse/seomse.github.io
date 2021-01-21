@@ -36,4 +36,4 @@ tags: [주식,ETF,비트코인,선물,macle]
 
 - 데이터 논리 구조는 아래와 같습니다.
 
-![데이터 논리구조](https://raw.githubusercontent.com/macle86/macle86.github.io/master/assets/img/data/data_l.png)
+![데이터 논리구조](https://raw.githubusercontent.com/macle86/macle86.github.io/master/img/data/data_l.png)
