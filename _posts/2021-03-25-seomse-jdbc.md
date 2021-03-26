@@ -2,7 +2,7 @@
 title: seomse-jdbc 개발 배경과 활용법
 author: macle
 date: 2020-03-25 21:30:00 +0800
-categories: [project]
+categories: [project,java]
 tags: [macle,java,jdbc]
 ---
 
@@ -26,12 +26,12 @@ tags: [macle,java,jdbc]
 
 # 이러한 상황에서 사용
 - DB를 설계하기전에 아래처럼 도메인 헤드별 타입을 정의하고, 용어사전을 만들어서 사용하는 경우가 많았는데 당시에는 이러한 규칙이 잘 지켜지지 않으면 데이터 품질평가 점수가 좋지 않았습니다.
-![도메인 헤드](https://raw.githubusercontent.com/macle86/macle86.github.io/master/img/rdb/domain_heag.JPG)
+  ![도메인 헤드](https://raw.githubusercontent.com/macle86/macle86.github.io/master/img/rdb/domain_heag.JPG)
 
-![용어사전](https://github.com/macle86/macle86.github.io/blob/master/img/rdb/rdb_dic.JPG)
+  ![용어사전](https://raw.githubusercontent.com/macle86/macle86.github.io/master/img/rdb/rdb_dic.JPG)
 
 - 위 규칙을 적용한 테이블 형태
-![테이블](https://github.com/macle86/macle86.github.io/blob/master/img/rdb/table_sample.JPG)
+  ![테이블](https://raw.githubusercontent.com/macle86/macle86.github.io/master/img/rdb/table_sample.JPG)
 
 - 위 그림을 보면 항상 컬럼뒤에 도메인 헤드가 붙는 설계형태이고 아무런 도메인 헤드가 붙지않으면 varchar, char 형태의 컬럼입니다.
 - 이러한 설계 구조에서 쉽게 사용하고자하여 개발하게 되었습니다.
@@ -105,12 +105,12 @@ import com.seomse.jdbc.objects.JdbcObjects;
  */
 public class ObjectMake {
 
-    public static void main(String[] args) {
-        //noinspection ResultOfMethodCallIgnored
-        String tableName = "T_STOCK_ITEM";
-        System.out.println(JdbcObjects.makeObjectValue(tableName));
+  public static void main(String[] args) {
+    //noinspection ResultOfMethodCallIgnored
+    String tableName = "T_STOCK_ITEM";
+    System.out.println(JdbcObjects.makeObjectValue(tableName));
 
-    }
+  }
 }
 
 
@@ -173,7 +173,7 @@ public class StockItem {
 - https://github.com/seomse/seomse-jdbc/blob/master/src/main/java/com/seomse/jdbc/JdbcQuery.java
 - public static List<Map<String, String>> getMapStringList(String sql);
 - public static String getResultOne(String sql)
-과 같은 다양한 메소드를 지원하니 오픈소스 이므로 많은필요한 부분의 내용을 확인 할 수 있습니다.
+  과 같은 다양한 메소드를 지원하니 오픈소스 이므로 많은필요한 부분의 내용을 확인 할 수 있습니다.
 
 또한 DB시간과 시퀀스를 가져오는 부분은 com.seomse.jdbc.Database 에서 제공합니다.
 - public static String nextVal(String sequenceName)
@@ -197,24 +197,24 @@ import java.sql.Connection;
  * @author macle
  */
 public class RowDataCopy {
-    public static void main(String[] args) {
-        try{
+  public static void main(String[] args) {
+    try{
 
-            Connection selectConn = ConnectionFactory.newConnection("oracle", "jdbc:oracle:thin:@127.0.0.1:1521:orcl", "select", "select");
-            Connection insertConn = ConnectionFactory.newConnection("oracle", "jdbc:oracle:thin:@127.0.0.1:1521:orcl", "insert", "insert");
+      Connection selectConn = ConnectionFactory.newConnection("oracle", "jdbc:oracle:thin:@127.0.0.1:1521:orcl", "select", "select");
+      Connection insertConn = ConnectionFactory.newConnection("oracle", "jdbc:oracle:thin:@127.0.0.1:1521:orcl", "insert", "insert");
 
-            String [] tables =
-                    {"TABLE_NAME"}
-           ;
-            RowDataInOut rowDataInOut = new RowDataInOut();
+      String [] tables =
+        {"TABLE_NAME"}
+        ;
+      RowDataInOut rowDataInOut = new RowDataInOut();
 
-            rowDataInOut.tableCopy(selectConn, insertConn,tables);
+      rowDataInOut.tableCopy(selectConn, insertConn,tables);
 
 
-        }catch(Exception e){
-            e.printStackTrace();
-        }
+    }catch(Exception e){
+      e.printStackTrace();
     }
+  }
 }
 
 
@@ -230,10 +230,10 @@ import com.seomse.jdbc.admin.RowDataInOut;
  * @author macle
  */
 public class RowDataOut {
-    public static void main(String[] args) {
-        RowDataInOut dataInOut = new RowDataInOut();
-        dataInOut.dataOut();
-    }
+  public static void main(String[] args) {
+    RowDataInOut dataInOut = new RowDataInOut();
+    dataInOut.dataOut();
+  }
 
 }
 ```
@@ -248,11 +248,11 @@ import com.seomse.jdbc.admin.RowDataInOut;
  * @author macle
  */
 public class RowDataIn {
-    public static void main(String[] args) {
-        RowDataInOut dataInOut = new RowDataInOut();
-        dataInOut.dataIn();
+  public static void main(String[] args) {
+    RowDataInOut dataInOut = new RowDataInOut();
+    dataInOut.dataIn();
 
-    }
+  }
 }
 
 ```
