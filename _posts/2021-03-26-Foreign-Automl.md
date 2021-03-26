@@ -1,7 +1,7 @@
 ---
 title: 선물시장 외국인 수급과 AutoML 연구
 author: wjrmffldrhrl
-date: 2021-03-26 21:30:00 +0800
+date: 2021-03-25 21:30:00 +0800
 categories: [자동매매]
 tags: [선물,wjrmffldrhrl]
 ---
