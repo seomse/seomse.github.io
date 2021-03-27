@@ -3,7 +3,7 @@ title: 선물시장 외국인 수급과 AutoML 연구
 author: wjrmffldrhrl
 date: 2021-03-25 21:30:00 +0800
 categories: [자동매매]
-tags: [선물,wjrmffldrhrl]
+tags: [선물,wjrmffldrhrl,머신러닝]
 ---
 - 작성자 : wjrmffldrhrl
 - 작성자 블로그: https://wjrmffldrhrl.github.io/
@@ -92,23 +92,23 @@ AutoML을 사용해 다양한 Feature(장 초반 생성되는 패턴)를 학습�
 
 전체 데이터 중 일부 데이터를 사용해 두 지수를 비교하였고 값의 단위가 다르기 때문에 `sklearn.preprocessing`의 `MinMaxScaler`를 사용해 정규화를 진행했다.
 
-두 데이터에서 학습 데이터를 추출해야 하는데 위에서 말했던 것 처럼 분류의 형태로 접근할 것이다. 
+두 데이터에서 학습 데이터를 추출해야 하는데 위에서 말했던 것 처럼 분류의 형태로 접근할 것이다.
 
-장 초반에 생성되는 지수 패턴과 순매수량 패턴을 feature로 잡고 장 마감시 지수가 패턴이 끝날 때 지수보다 1%이상 상승했으면 Positive, 아니라면 Negative로 보고 이항 분류 형태의 데이터를 만들 것이다.  
+장 초반에 생성되는 지수 패턴과 순매수량 패턴을 feature로 잡고 장 마감시 지수가 패턴이 끝날 때 지수보다 1%이상 상승했으면 Positive, 아니라면 Negative로 보고 이항 분류 형태의 데이터를 만들 것이다.
 
 ### get_train_data
 
 ```python
-def get_train_data(pattern_data, index_data, 
+def get_train_data(pattern_data, index_data,
                    target_pattern_column='Net_Purchase', target_index_column='Open',
                    use_index_data_to_pattern=False, need_increase_percentage=3,
                    pattern_start_position=0, pattern_end_position=30):
-    
+
 
     dates = np.unique(pattern_data['Date'].values)
     feature_labels = []
 
-    
+
     for date in dates:
         try:
             target_pattern_data = pattern_data[pattern_data['Date'] == date].iloc[:, 2:]
@@ -120,10 +120,10 @@ def get_train_data(pattern_data, index_data,
             start_index_position = 0
             if use_index_data_to_pattern:
                 start_index_position = pattern_end_position
-            
+
             start_index = target_index_data[target_index_column].iloc[start_index_position]
             end_index = target_index_data[target_index_column].iloc[-1]
-   
+
             label = 0
             if end_index >= (start_index + (start_index * 0.01 * need_increase_percentage)):
                 label = 1
@@ -137,10 +137,10 @@ def get_train_data(pattern_data, index_data,
             scaled_target_index = scaler.transform(target_index_data)
 
             feature_label = []
-            
+
             for row in scaled_target_pattern[:, target_pattern_column_position][pattern_start_position:pattern_end_position]:
                 feature_label.append(row)
-                
+
 
             if use_index_data_to_pattern:
                 for row in scaled_target_index[:, target_index_column_position][pattern_start_position:pattern_end_position]:
@@ -156,9 +156,9 @@ def get_train_data(pattern_data, index_data,
     return feature_labels
 ```
 
-하루에 생성되는 데이터를 결합하여 한 row로 생성할 것이고 `pattern_end_position`부터  `pattern_end_position` 까지 생성되는 데이터를 패턴으로 판단하여 feature로 row에 추가한다. 
+하루에 생성되는 데이터를 결합하여 한 row로 생성할 것이고 `pattern_end_position`부터  `pattern_end_position` 까지 생성되는 데이터를 패턴으로 판단하여 feature로 row에 추가한다.
 
-기본값이 0 ~ 30으로 잡혀있는데 이는 장 시작 9:00 부터 장 마감 16:20 까지 420여개(종종 몇개의 분봉은 넘어가는 데이터도 존재함)의 분봉이 존재하므로 position값 1당 1분으로 봐도 무방하다. 
+기본값이 0 ~ 30으로 잡혀있는데 이는 장 시작 9:00 부터 장 마감 16:20 까지 420여개(종종 몇개의 분봉은 넘어가는 데이터도 존재함)의 분봉이 존재하므로 position값 1당 1분으로 봐도 무방하다.
 
 즉 장 시작 30분간의 패턴을 학습에 사용되는 Feature로 사용한다는 뜻이다.
 
@@ -212,7 +212,7 @@ y = train['60']
 train_x, test_x, train_y, test_y = train_test_split(x, y, test_size = 0.3, random_state=123)
 ```
 
-학습에 사용할 라이브러리는 AutoKeras이다. 
+학습에 사용할 라이브러리는 AutoKeras이다.
 
 AutoKeras의 사용법은 간단하다. 학습시킬 데이터의 형태에 맞는 클래스를 선택해서 최대 반복 횟수와 epochs만 지정해주면 학습을 반복하면서 가장 성능이 좋은 모델을 찾아낸다.
 

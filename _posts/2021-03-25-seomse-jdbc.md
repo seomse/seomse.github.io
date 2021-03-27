@@ -2,8 +2,8 @@
 title: seomse-jdbc 개발 배경과 활용법
 author: macle
 date: 2021-03-25 21:30:00 +0800
-categories: [java]
-tags: [macle,java,jdbc]
+categories: [개발]
+tags: [macle,java,jdbc,data]
 ---
 
 # 개요

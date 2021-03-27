@@ -2,9 +2,9 @@
 title: Java Serialization
 author: wjrmffldrhrl
 date: 2021-01-22 11:30:00 +0800
-categories: [java]
+categories: [개발]
 tags: [java,wjrmffldrhrl]
----  
+---
 
 # What is Serialize?
 - 객체 또는 데이터를 바이트 형태로 변환하는 기술
