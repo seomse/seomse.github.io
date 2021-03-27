@@ -157,8 +157,8 @@ public class ObjectMake {
 ```
 위와 같이 어노테이션을 생성하여
 ```java
-@Table(name="B_STOCK_ITEM")
-public class StockItem {
+@Table(name="T_STOCK_ITEM")
+public class Item {
   @PrimaryKey(seq = 1)
   @Column(name = "ITEM_CD")
   private String code;
@@ -170,7 +170,26 @@ public class StockItem {
   private MarketType marketType = MarketType.KOSPI;
 }
 ```
+
+
 위 형태의 객체를 만들어 사용하는 형태입니다.
+
+- 위와 같은 형태로 생성된 객체를 아래처럼 select를 하거나
+
+```java
+
+    //seomse-stock analysis module 의 일부
+    List<Item> stockItemList = JdbcObjects.getObjList(Item.class, "(DELISTING_DT < ? OR DELISTING_DT IS NULL) AND LISTING_YMD <= '" + ymd +"'", PrepareStatements.newTimeMap(time));
+
+```
+
+아래와 같이 다른 DB에서 데이터를 가져와서 이관하는 형태로 사용하기도 합니다.
+```java
+
+  JdbcNaming.insert(insertConn, JdbcNaming.getObjList(selectConn, Market5mNo.class, "YMDHM >= '" + ymdhm + "'"),true);
+
+```
+
 
 그박에도 com.seomse.jdbc.JdbcQuery 클래스에서
 - https://github.com/seomse/seomse-jdbc/blob/master/src/main/java/com/seomse/jdbc/JdbcQuery.java
