@@ -5,6 +5,9 @@ date: 2021-03-25 21:30:00 +0800
 categories: [개발]
 tags: [macle,java,jdbc,data]
 ---
+- 작성자 : macle
+- 작성자 블로그: https://macle.dev
+- 원본경로: https://macle.dev/posts/seomse-jdbc/
 
 # 개요
 - java 진영의 jdbc 는 jpa, Hibernate, mybatis 등 다양하게 쓸 수 있는 방법 많습니다.
