@@ -2,8 +2,8 @@
 title: java 파일 라인수 얻기, 특정라인 빨리 읽기 (빠른 라인처리)
 author: macle
 date: 2021-01-20 10:30:00 +0800
-categories: [java]
-tags: [java,file,macle]
+categories: [개발]
+tags: [java,file,macle,data]
 ---
 - 작성자 : macle
 - 작성자 블로그: https://macle.dev
