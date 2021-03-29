@@ -4,6 +4,7 @@ author: monds
 date: 2021-03-29 10:05:00 +0800
 categories: [개발]
 tags: [elk,elastic,elasticsearch,logstash,kibana,filebeat,metricbeat,heartbeat]
+regenerate: true
 ---
 
 # ELK Stack
