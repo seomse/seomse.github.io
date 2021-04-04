@@ -1,0 +1,233 @@
+<!DOCTYPE html><html lang="en" mode="light" ><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><meta name="theme" content="Chirpy v2.7.2"><meta name="generator" content="Jekyll v4.2.0" /><meta property="og:title" content="ELK Stack 설치하기" /><meta name="author" content="monds" /><meta property="og:locale" content="en_US" /><meta name="description" content="ELK Stack 최근 본사에서 정책모니터링 관련 서비스를 운영하면서 장애에 빠르게 대응하기 위해 프로세스 관제가 필요해졌습니다. ELK Stack으로 모니터링 시스템 환경을 구축하면서 얻은 경험을 공유하기 위해 이 문서를 작성하였습니다." /><meta property="og:description" content="ELK Stack 최근 본사에서 정책모니터링 관련 서비스를 운영하면서 장애에 빠르게 대응하기 위해 프로세스 관제가 필요해졌습니다. ELK Stack으로 모니터링 시스템 환경을 구축하면서 얻은 경험을 공유하기 위해 이 문서를 작성하였습니다." /><link rel="canonical" href="https://seomse.github.io/posts/elk-stack/" /><meta property="og:url" content="https://seomse.github.io/posts/elk-stack/" /><meta property="og:site_name" content="Seomse" /><meta property="og:type" content="article" /><meta property="article:published_time" content="2021-03-28T11:05:00+09:00" /><meta name="twitter:card" content="summary" /><meta property="twitter:title" content="ELK Stack 설치하기" /><meta name="twitter:site" content="@comseomse" /><meta name="twitter:creator" content="@monds" /><meta name="google-site-verification" content="google_meta_tag_verification" /> <script type="application/ld+json"> {"description":"ELK Stack 최근 본사에서 정책모니터링 관련 서비스를 운영하면서 장애에 빠르게 대응하기 위해 프로세스 관제가 필요해졌습니다. ELK Stack으로 모니터링 시스템 환경을 구축하면서 얻은 경험을 공유하기 위해 이 문서를 작성하였습니다.","url":"https://seomse.github.io/posts/elk-stack/","@type":"BlogPosting","headline":"ELK Stack 설치하기","dateModified":"2021-03-29T11:05:24+09:00","datePublished":"2021-03-28T11:05:00+09:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://seomse.github.io/posts/elk-stack/"},"author":{"@type":"Person","name":"monds"},"@context":"https://schema.org"}</script><title>ELK Stack 설치하기 | Seomse</title><link rel="shortcut icon" href="/assets/img/favicons/favicon.ico" type="image/x-icon"><link rel="icon" href="/assets/img/favicons/favicon.ico" type="image/x-icon"><link rel="apple-touch-icon" href="/assets/img/favicons/favicon.png"><link rel="apple-touch-icon" href="/assets/img/favicons/favicon.png"><link rel="apple-touch-icon" sizes="57x57" href="/assets/img/favicons/favicon.png"><link rel="apple-touch-icon" sizes="60x60" href="/assets/img/favicons/favicon.png"><link rel="apple-touch-icon" sizes="72x72" href="/assets/img/favicons/favicon.png"><link rel="apple-touch-icon" sizes="76x76" href="/assets/img/favicons/favicon.png"><link rel="apple-touch-icon" sizes="114x114" href="/assets/img/favicons/favicon.png"><link rel="apple-touch-icon" sizes="120x120" href="/assets/img/favicons/favicon.png"><link rel="apple-touch-icon" sizes="144x144" href="/assets/img/favicons/favicon.png"><link rel="apple-touch-icon" sizes="152x152" href="/assets/img/favicons/favicon.png"><link rel="apple-touch-icon" sizes="180x180" href="/assets/img/favicons/favicon.png"><link rel="icon" type="image/png" sizes="192x192" href="/assets/img/favicons/favicon.png"><link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicons/favicon.png"><link rel="icon" type="image/png" sizes="96x96" href="/assets/img/favicons/favicon.png"><link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicons/favicon.png"><link rel="manifest" href="/assets/img/favicons/manifest.json"><meta name='msapplication-config' content='/assets/img/favicons/browserconfig.xml'><meta name="msapplication-TileColor" content="#ffffff"><meta name="msapplication-TileImage" content="/assets/img/favicons/ms-icon-144x144.png"><meta name="theme-color" content="#ffffff"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"><link rel="dns-prefetch" href="https://fonts.gstatic.com"><link rel="preconnect" href="https://www.google-analytics.com" crossorigin="use-credentials"><link rel="dns-prefetch" href="https://www.google-analytics.com"><link rel="preconnect" href="https://www.googletagmanager.com" crossorigin="anonymous"><link rel="dns-prefetch" href="https://www.googletagmanager.com"><link rel="preconnect" href="cdn.jsdelivr.net"><link rel="dns-prefetch" href="cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha256-LA89z+k9fjgMKQ/kq4OO2Mrf8VltYml/VES+Rg0fh20=" crossorigin="anonymous"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.11.2/css/all.min.css" integrity="sha256-+N4/V/SbAFiW1MPBCXnfnP9QSN3+Keu+NlB+0ev/YKQ=" crossorigin="anonymous"><link rel="preload" href="/assets/css/post.css" as="style"><link rel="stylesheet" href="/assets/css/post.css"><link rel="preload" as="style" href="/assets/css/lib/bootstrap-toc.min.css"><link rel="stylesheet" href="/assets/css/lib/bootstrap-toc.min.css" /> <script src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script> <script defer src="https://cdn.jsdelivr.net/combine/npm/popper.js@1.15.0,npm/bootstrap@4/dist/js/bootstrap.min.js"></script> <script async src="/assets/js/post.min.js"></script> <script defer src="/app.js"></script> <script defer src="https://www.googletagmanager.com/gtag/js?id="></script> <script> document.addEventListener("DOMContentLoaded", function(event) { window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', ''); }); </script><body data-spy="scroll" data-target="#toc"><div id="sidebar" class="d-flex flex-column align-items-end"><div class="profile-wrapper text-center"><div id="avatar"> <a href="/" alt="avatar" class="mx-auto"> <img src="https://raw.githubusercontent.com/seomse/seomse.github.io/master/assets/img/s_avatar.JPG" alt="avatar" onerror="this.style.display='none'"> </a></div><div class="site-title mt-3"> <a href="/">Seomse</a></div><div class="site-subtitle font-italic">개발자모임 섬세한사람들</div></div><ul class="w-100"><li class="nav-item"> <a href="/" class="nav-link"> <i class="fa-fw fas fa-home ml-xl-3 mr-xl-3 unloaded"></i> <span>HOME</span> </a><li class="nav-item"> <a href="/tabs/categories/" class="nav-link"> <i class="fa-fw fas fa-stream ml-xl-3 mr-xl-3 unloaded"></i> <span>CATEGORIES</span> </a><li class="nav-item"> <a href="/tabs/tags/" class="nav-link"> <i class="fa-fw fas fa-tags ml-xl-3 mr-xl-3 unloaded"></i> <span>TAGS</span> </a><li class="nav-item"> <a href="/tabs/archives/" class="nav-link"> <i class="fa-fw fas fa-archive ml-xl-3 mr-xl-3 unloaded"></i> <span>ARCHIVES</span> </a><li class="nav-item"> <a href="/tabs/about/" class="nav-link"> <i class="fa-fw fas fa-info ml-xl-3 mr-xl-3 unloaded"></i> <span>ABOUT</span> </a></ul><div class="sidebar-bottom mt-auto d-flex flex-wrap justify-content-center"> <a href="https://github.com/seomse" aria-label="github" target="_blank" rel="noopener"> <i class="fab fa-github-alt"></i> </a> <a href="https://twitter.com/comseomse" aria-label="twitter" target="_blank" rel="noopener"> <i class="fab fa-twitter"></i> </a> <a href=" javascript:location.href = 'mailto:' + ['comseomse','gmail.com'].join('@')" aria-label="email" > <i class="fas fa-envelope"></i> </a> <a href="/feed.xml" aria-label="rss" > <i class="fas fa-rss"></i> </a></div></div><div id="topbar-wrapper" class="row justify-content-center topbar-down"><div id="topbar" class="col-11 d-flex h-100 align-items-center justify-content-between"> <span id="breadcrumb"> <span> <a href="/"> posts </a> </span> <span>ELK Stack 설치하기</span> </span> <i id="sidebar-trigger" class="fas fa-bars fa-fw"></i><div id="topbar-title"> Post</div><i id="search-trigger" class="fas fa-search fa-fw"></i> <span id="search-wrapper" class="align-items-center"> <i class="fas fa-search fa-fw"></i> <input class="form-control" id="search-input" type="search" aria-label="search" placeholder="Search..."> <i class="fa fa-times-circle fa-fw" id="search-cleaner"></i> </span> <span id="search-cancel" >Cancel</span></div></div><div id="main-wrapper"><div id="main"><div class="row"><div id="post-wrapper" class="col-12 col-lg-11 col-xl-8"><div class="post pl-1 pr-1 pl-sm-2 pr-sm-2 pl-md-4 pr-md-4"><h1 data-toc-skip>ELK Stack 설치하기</h1><div class="post-meta text-muted d-flex flex-column"><div> <span class="timeago " data-toggle="tooltip" data-placement="bottom" title="Sun, Mar 28, 2021, 11:05 AM +0900" > Mar 28 <i class="unloaded">2021-03-28T11:05:00+09:00</i> </span> by <span class="author"> monds </span></div><div> <span> Updated <span class="timeago lastmod" data-toggle="tooltip" data-placement="bottom" title="Mon, Mar 29, 2021, 11:05 AM +0900" > Mar 29 <i class="unloaded">2021-03-29T11:05:24+09:00</i> </span> </span> <span class="readtime" data-toggle="tooltip" data-placement="bottom" title="2362 words">13 min</span></div></div><div class="post-content"><h1 id="elk-stack">ELK Stack</h1><p>최근 본사에서 정책모니터링 관련 서비스를 운영하면서 장애에 빠르게 대응하기 위해 프로세스 관제가 필요해졌습니다. ELK Stack으로 모니터링 시스템 환경을 구축하면서 얻은 경험을 공유하기 위해 이 문서를 작성하였습니다.</p><h2 id="elk-stack-">ELK Stack ?</h2><p><strong>ELK</strong> 는 Elasticsearch, Logstash, Kibana 오픈 소스 프로젝트로 구성되어 있습니다. Elasticsearch 는 검색 및 분석 엔진입니다. Logstash는 여러 소스에서 동시에 데이터를 수집하여 변환한 후 Elasticsearch 로 전송하는 서버 사이드 데이터 처리 파이프라인입니다. Kibana는 사용자가 Elasticsearch에서 차트와 그래프를 이용해 데이터를 시각화할 수 있게 해줍니다.</p><p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/assets/images/image-20210318-011345.png" alt="" /></p><p>수집할 수 있는 로그의 형태는 파일부터 각종 시스템 정보(Elasticsearch에선 Metric이라 부릅니다) 등이 존재하는데 elastic에선 이와 같은 데이터를 수집할 수 있는 수집기를 무료로 제공하고 있습니다.</p><p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/assets/images/image-20210318-004953.png" alt="" /></p><p>엘라스틱은 Elasticsearch + Logstash + Kibana + Beats 를 Elasic Stack 으로 통합하여 부르고 있습니다.</p><h2 id="elasticsearch-설치">Elasticsearch 설치</h2><p>Elasticsearch는 기본적으로 <strong>X-Pack</strong> (Security, Alerting, Monitoring, Reporting, Machine Learning 등) 이 포함되어 있습니다. 예전에는 무료로 사용이 가능했지만 6.3버전 이후부터 라이센스가 변경되었기 때문에 알림과 같은 유용한 기능을 사용하려면 별도 라이센스 비용을 지불해야합니다. X-Pack 대신 AWS에서 공개한 Open Distro 를 사용하여 알림 기능을 사용하기로 했습니다.</p><p>(X-Pack 이 포함된 Basic 버전은 무료이긴 하지만 Elastic 제품을 내재한 제품으로 비즈니스를 하려면 Elasic사와 라이센스 계약이 필요합니다.)</p><p>yum, rpm, tarball 등의 다양한 방법으로 설치가 가능하지만 docker 를 사용하여 설치를 진행했습니다.</p><h3 id="docker-compose">docker-compose</h3><p>docker를 사용하다보면 컨테이너 실행 옵션이 많아질 경우 도커 명령어의 옵션이 장황해지는 경우가 많습니다. 그리고 컨테이너의 실행 순서가 존재하는 경우 이를 기억하기 위해 별도의 문서로 관리를 해야하는데 docker compose라는 툴을 이용하여 이와 같은 부분을 해소할 수 있습니다.</p><h3 id="docker-composeyml">docker-compose.yml</h3><div class="language-yaml highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+</pre><td class="rouge-code"><pre><span class="na">version</span><span class="pi">:</span> <span class="s1">'</span><span class="s">3.8'</span>
+<span class="na">services</span><span class="pi">:</span>
+  <span class="na">elasticsearch</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">docker.elastic.co/elasticsearch/elasticsearch-oss:7.10.2</span>
+    <span class="na">container_name</span><span class="pi">:</span> <span class="s">es01</span>
+    <span class="na">user</span><span class="pi">:</span> <span class="s1">'</span><span class="s">1001'</span> <span class="c1"># 컨테이너 내부 계정이 아닌, 외부 계정이다. 단, docker group 계정이어야 함.</span>
+    <span class="na">environment</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">cluster.name=es-docker-cluster</span>
+      <span class="pi">-</span> <span class="s">node.name=c1.erica.moara.org</span>
+      <span class="pi">-</span> <span class="s">node.master=true</span>
+      <span class="pi">-</span> <span class="s">node.data=true</span>
+      <span class="pi">-</span> <span class="s">discovery.seed_hosts=192.168.0.82,192.168.0.83</span>
+      <span class="pi">-</span> <span class="s">cluster.initial_master_nodes=192.168.0.82</span>
+      <span class="pi">-</span> <span class="s">bootstrap.memory_lock=true</span>
+      <span class="pi">-</span> <span class="s">network.publish_host=192.168.0.82</span>
+      <span class="pi">-</span> <span class="s2">"</span><span class="s">ES_JAVA_OPTS=-Xms512m</span><span class="nv"> </span><span class="s">-Xmx512m"</span>
+    <span class="na">ulimits</span><span class="pi">:</span>
+      <span class="na">memlock</span><span class="pi">:</span>
+        <span class="na">soft</span><span class="pi">:</span> <span class="s">-1</span>
+        <span class="na">hard</span><span class="pi">:</span> <span class="s">-1</span>
+    <span class="na">ports</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">9200:9200</span>
+      <span class="pi">-</span> <span class="s">9300:9300</span>
+    <span class="na">volumes</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">/opt/elk/elasticsearch/data:/usr/share/elasticsearch/data</span>
+</pre></table></code></div></div><h3 id="elasticsearch-실행">Elasticsearch 실행</h3><p>YAML 형식의 docker compose 설정 파일을 작성한 뒤 해당 경로에서 다음 명령어로 컨테이너 실행을 진행합니다. 아래 명령어로 docker image 빌드부터 설치 및 background 구동 과정 작업을 모두 진행합니다.</p><div class="language-plaintext highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre><td class="rouge-code"><pre>$ docker-compose up -d
+</pre></table></code></div></div><h2 id="logstash-설치">Logstash 설치</h2><h3 id="logstash-docker-compose">Logstash docker compose</h3><div class="language-yaml highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre><td class="rouge-code"><pre><span class="na">version</span><span class="pi">:</span> <span class="s1">'</span><span class="s">3.8'</span>
+<span class="na">services</span><span class="pi">:</span>
+<span class="na">logstash</span><span class="pi">:</span>
+<span class="na">image</span><span class="pi">:</span> <span class="s">docker.elastic.co/logstash/logstash-oss:7.10.2</span>
+<span class="na">ports</span><span class="pi">:</span>
+<span class="pi">-</span> <span class="s">5044:5044</span>
+<span class="na">volumes</span><span class="pi">:</span>
+<span class="pi">-</span> <span class="s">./logstash.conf:/usr/share/logstash/pipeline/logstash.conf</span>
+</pre></table></code></div></div><h3 id="설정">설정</h3><p>logstash는 설정이 전부이며 설정은 크게 input / filter / output 구조로 되어 있습니다. input → filter → output 프로세스로 각각 다양한 플러그인을 통해 여러 종류의 데이터 처리가 가능합니다.</p><p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/assets/images/image-20210322-005613.png" alt="" /></p><h3 id="input">Input</h3><p>logstash를 통해 입력받을 소스에 대한 설정으로 다양한 input을 지원합니다.</p><ul><li>azure, beats, cloudwatch, couchdb, elasticsearch, file, github, rabbitmq, redis 등등<div class="language-groovy highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre><td class="rouge-code"><pre><span class="n">input</span> <span class="o">{</span>
+  <span class="n">beats</span> <span class="o">{</span>
+      <span class="n">port</span> <span class="o">=&gt;</span> <span class="mi">5044</span>
+      <span class="n">host</span> <span class="o">=&gt;</span> <span class="s2">"0.0.0.0"</span>
+      <span class="n">client_inactivity_timeout</span> <span class="o">=&gt;</span> <span class="mi">3600</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</pre></table></code></div></div></ul><h3 id="filter">Filter</h3><p>수집한 로그를 어떻게 파싱할지에 대한 설정으로 messge 필드에 저장됩니다. 단순 로그 수집이나 알림 기능으로만 사용하는게 아닌 로그를 이용하여 데이터 분석을 하려면 filter 를 통해 데이터를 세분화하는 작업이 필요합니다.</p><p>logstash 에서 filter 중에 가장 빈번하게 사용되는게 grok (grok: 이해하다) 플러그인 입니다. 날짜, 경로 등의 미리 정의된 패턴은 바로 활용이 가능합니다.</p><div class="language-groovy highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre><td class="rouge-code"><pre><span class="n">filter</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">[</span><span class="n">fields</span><span class="o">][</span><span class="n">log_type</span><span class="o">]</span> <span class="o">==</span> <span class="s2">"java"</span> <span class="o">{</span>
+        <span class="n">grok</span> <span class="o">{</span>
+            <span class="n">match</span> <span class="o">=&gt;</span> <span class="o">{</span> <span class="s2">"message"</span> <span class="o">=&gt;</span> <span class="s2">"%{TIMESTAMP_ISO8601:timestamp} \[%{DATA:thread}\] %{LOGLEVEL:log-level} %{GREEDYDATA:message}"</span> <span class="o">}</span>
+        <span class="o">}</span>
+        <span class="n">date</span> <span class="o">{</span>
+            <span class="n">match</span> <span class="o">=&gt;</span> <span class="o">[</span><span class="s2">"timestamp"</span><span class="o">,</span> <span class="s2">"yyyy-MM-dd HH:mm:ss"</span><span class="o">,</span> <span class="s2">"ISO8601"</span><span class="o">]</span>
+            <span class="n">target</span> <span class="o">=&gt;</span> <span class="s2">"@timestamp"</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></table></code></div></div><h3 id="output">Output</h3><p>output은 logstash로 처리한 데이터를 전달할 destination을 설정합니다. 다양한 output plugin 이 존재합니다.</p><ul><li>elasticsearch, csv, email, file, http, kafka, rabbitmq, redmine, redis, s3 등등<div class="language-groovy highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre><td class="rouge-code"><pre><span class="n">output</span> <span class="o">{</span>
+  <span class="n">elasticsearch</span> <span class="o">{</span>
+      <span class="n">hosts</span> <span class="o">=&gt;</span> <span class="s2">"10.10.1.16:9200"</span>
+      <span class="n">manage_template</span> <span class="o">=&gt;</span> <span class="kc">false</span>
+      <span class="n">index</span> <span class="o">=&gt;</span> <span class="s2">"%{[@metadata][beat]}-%{[fields][index_name]}-%{+YYYY.MM.dd}"</span>
+      <span class="n">document_type</span> <span class="o">=&gt;</span> <span class="s2">"%{[@metadata][type]}"</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</pre></table></code></div></div><h2 id="kibana-설치">Kibana 설치</h2></ul><h3 id="kibana-docker-compose">Kibana docker compose</h3><div class="language-yaml highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+</pre><td class="rouge-code"><pre><span class="na">version</span><span class="pi">:</span> <span class="s1">'</span><span class="s">3.8'</span>
+<span class="na">services</span><span class="pi">:</span>
+    <span class="na">kib01</span><span class="pi">:</span>
+        <span class="na">image</span><span class="pi">:</span> <span class="s">docker.elastic.co/kibana/kibana-oss:7.10.2</span>
+        <span class="na">environment</span><span class="pi">:</span>
+            <span class="na">ELASTICSEARCH_URL</span><span class="pi">:</span> <span class="s">http://192.168.0.82:9200</span>
+            <span class="na">ELASTICSEARCH_HOSTS</span><span class="pi">:</span> <span class="s1">'</span><span class="s">["http://192.168.0.82:9200"]'</span>
+        <span class="na">ports</span><span class="pi">:</span>
+            <span class="pi">-</span> <span class="s">5601:5601</span>
+<span class="na">volumes</span><span class="pi">:</span>
+    <span class="na">data</span><span class="pi">:</span>
+        <span class="na">driver</span><span class="pi">:</span> <span class="s">local</span>
+</pre></table></code></div></div><h3 id="kibana-실행">Kibana 실행</h3><div class="language-plaintext highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre><td class="rouge-code"><pre>$ docker-compose up -d
+</pre></table></code></div></div><h2 id="beats">Beats</h2><p>마찬가지로 yum, rpm, docker 등 다양한 방법으로 설치가 가능합니다. beat 는 아래와 같은 다양한 모듈을 기본적으로 제공하고 있습니다.</p><p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/assets/images/image-20210322-011114.png" alt="" /></p><h2 id="kibana">Kibana</h2><p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/assets/images/image-20210322-011757.png" alt="" /></p><ul><li>Discover: 특정 index pattern에 대한 데이터를 조회<li>Dashboard: 사용자가 배치한 시각화의 모음<li>Visualize: 시각화 생성<li>Alerting: Open Distro 플러그인 통해 추가된 알림 기능<li>Dev Tools: REST 명령으로 데이터 조회<li>Stack Management: index pattern 관리, 설정 관리</ul><p>kibana를 사용하는 순서는 다음과 같습니다.</p><ol><li>Stack Management에서 index pattern 생성<li>Visualize 에서 시각화 생성 (차트 생성)<li>Dashboard 에서 생성한 시각화 조합</ol><h3 id="index-pattern-생성">Index Pattern 생성</h3><p>Index Patterns 를 클릭합니다.</p><p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/assets/images/image-20210322-013407.png" alt="" /></p><p>Create index pattern를 클릭합니다.</p><p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/assets/images/image-20210322-013723.png" alt="" /></p><p>index pattern name을 입력한 후 Next step을 클릭합니다. (asterisk * 지원)</p><p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/assets/images/image-20210322-013839.png" alt="" /></p><p>여기서 중요한 점은 Time field 설정입니다. 기본 날짜 필드를 자동적으로 부여되는 생성날짜로 사용할지 로그 내에 존재하는 사용자 날짜 필드를 사용할지 선택합니다.</p><p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/assets/images/image-20210322-014107.png" alt="" /></p><p>이후 Discover 메뉴에서 조회가 가능합니다.</p><p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/assets/images/image-20210322-014419.png" alt="" /></p><h2 id="kibana---alerting">Kibana - Alerting</h2><h3 id="정책-모니터링-관련-알람-설정">정책 모니터링 관련 알람 설정</h3><p>정책모니터링 시스템은 기능에 따라 서비스가 나눠져 있고 개수가 많으며 24시간 서비스되어야 하는 시스템입니다. 프로세스와 http 응답 로그를 수집하여 프로세스가 정상적으로 기동 중인지 모니터링하고 만약 서비스 DOWN되었다고 판단되면 슬랙 채널로 알림을 주도록 설정했습니다.</p><p>Kibana를 이용하여 알람을 설정하려면 Monitor, Trigger, Destination을 설정해야합니다.</p><h3 id="destination">Destination</h3><p>Add destination 버튼을 눌러 Destination 생성 화면으로 이동합니다.</p><p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/assets/images/image-20210322-015329.png" alt="" /></p><p>Name, Type 을 선택하고 slack의 경우 Webhook URL을 입력합니다. (슬랙뿐만아니라 이메일, custom webhook 도 지원합니다.)</p><p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/assets/images/image-20210322-015507.png" alt="" /></p><h3 id="monitor">Monitor</h3><p>Create monitor 버튼을 눌러서 Monitor 생성 화면으로 이동합니다.</p><p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/assets/images/image-20210322-015603.png" alt="" /></p><p>Monitor 이름을 입력하고 Define monitor 항목에서 Method of definition 항목을 선택합니다. 항목에는 2가지가 존재하는데 elastic query를 이용하는 방법과 visual graph을 이용하는 방법이 있습니다.</p><p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/assets/images/image-20210322-015818.png" alt="" /></p><p>아래는 최근 5분 동안 system.process.cmdline항목이 *WIGO_CRAWLER_SERVER*인 항목이 존재하는지 체크하는 쿼리 예시입니다. 데이터는 조회할 필요가 없기 때문에 size항목은 0을 설정합니다.</p><div class="language-json highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+</pre><td class="rouge-code"><pre><span class="p">{</span><span class="w">
+   </span><span class="nl">"size"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
+   </span><span class="nl">"query"</span><span class="p">:{</span><span class="w">
+      </span><span class="nl">"bool"</span><span class="p">:{</span><span class="w">
+         </span><span class="nl">"must"</span><span class="p">:[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+               </span><span class="nl">"range"</span><span class="p">:{</span><span class="w">
+                  </span><span class="nl">"@timestamp"</span><span class="p">:{</span><span class="w">
+                     </span><span class="nl">"from"</span><span class="p">:</span><span class="s2">"now-5m/m"</span><span class="p">,</span><span class="w">
+                     </span><span class="nl">"to"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+                     </span><span class="nl">"include_lower"</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span><span class="w">
+                     </span><span class="nl">"include_upper"</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span><span class="w">
+                     </span><span class="nl">"boost"</span><span class="p">:</span><span class="mi">1</span><span class="w">
+                  </span><span class="p">}</span><span class="w">
+               </span><span class="p">}</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+               </span><span class="nl">"wildcard"</span><span class="p">:{</span><span class="w">
+                  </span><span class="nl">"system.process.cmdline"</span><span class="p">:{</span><span class="w">
+                     </span><span class="nl">"wildcard"</span><span class="p">:</span><span class="s2">"*WIGO_CRAWLER_SERVER*"</span><span class="p">,</span><span class="w">
+                     </span><span class="nl">"boost"</span><span class="p">:</span><span class="mi">1</span><span class="w">
+                  </span><span class="p">}</span><span class="w">
+               </span><span class="p">}</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+         </span><span class="p">],</span><span class="w">
+         </span><span class="nl">"adjust_pure_negative"</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span><span class="w">
+         </span><span class="nl">"boost"</span><span class="p">:</span><span class="mi">1</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+   </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></pre></table></code></div></div><p>모니터링 스케쥴을 설정합니다. By interval, Daily, Weekly, Monthly, Custom Cron Expression 등 설정이 가능합니다.</p><p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/assets/images/image-20210322-020038.png" alt="" /></p><h3 id="trigger">Trigger</h3><p>Trigger name을 입력하고 Trigger condition을 설정합니다. monitor 결과에 대한 조건을 설정합니다. 만약 조회되는 결과가 없을 경우에 대한 트리거를 설정하려면 아래와 같이 입력합니다.</p><div class="language-plaintext highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre><td class="rouge-code"><pre>ctx.results[0].hits.total.value == 0
+</pre></table></code></div></div><p>마지막으로 Configure actions 를 설정합니다. Action name을 입력하고 아까 생성한 destination을 선택합니다.</p><p>Send test message를 눌러 slack 메시지가 오는지 확인 후 trigger를 생성합니다.</p><p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/assets/images/image-20210322-020506.png" alt="" /></p><h2 id="kibana---dashboard-활용">Kibana - dashboard 활용</h2><p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/assets/images/image-20210322-021137.png" alt="" /> <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/assets/images/image-20210322-021147.png" alt="" /></p><h2 id="부가적인-활용">부가적인 활용</h2><h3 id="logstash-logback">logstash logback</h3><p>application 단에서 json 등으로 정의된 로그를 logstash에 전송 가능</p><div class="language-xml highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+</pre><td class="rouge-code"><pre><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<span class="nt">&lt;configuration&gt;</span>
+    <span class="nt">&lt;appender</span> <span class="na">name=</span><span class="s">"LOGSTASH"</span> <span class="na">class=</span><span class="s">"net.logstash.logback.appender.LogstashTcpSocketAppender"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;destination&gt;</span>127.0.0.1:4560<span class="nt">&lt;/destination&gt;</span>
+        <span class="nt">&lt;encoder</span> <span class="na">class=</span><span class="s">"net.logstash.logback.encoder.LogstashEncoder"</span><span class="nt">&gt;&lt;/encoder&gt;</span>
+    <span class="nt">&lt;/appender&gt;</span>
+
+    <span class="nt">&lt;root&gt;</span>
+        <span class="nt">&lt;level</span> <span class="na">value=</span><span class="s">"INFO"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;appender-ref</span> <span class="na">ref=</span><span class="s">"LOGSTASH"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/root&gt;</span>
+<span class="nt">&lt;/configuration&gt;</span>
+</pre></table></code></div></div><h2 id="elk-권장-하드웨어-사양">ELK 권장 하드웨어 사양</h2><h3 id="기본-하드웨어-사양">기본 하드웨어 사양</h3><ul><li>RAM: 64GB (32GB or 16GB 가능)<li>CPU: 2 ~ 8 core<li>SSD: 200GB<li>RAID 0 (구성 디스크 속도 향상)</ul><h3 id="메모리--하드디스크-구성-비율">메모리 : 하드디스크 구성 비율</h3><ul><li>검색엔진 비율 &lt;1:16&gt;<li>로깅 시스템 &lt;1:48, 1:96 등&gt;</ul><h3 id="logstash">Logstash</h3><ul><li>RAM: 8 ~ 32GB<li>CPU: 4 ~ 16 core</ul><h3 id="elasticsearch-master">Elasticsearch (Master)</h3><ul><li>RAM: 8GB<li>CPU: 4core</ul><h3 id="elasticsearch-data">Elasticsearch (Data)</h3><ul><li>RAM: 16GB ~ 32GB<li>CPU: 8 ~ 16 core</ul><h3 id="kibana-1">Kibana</h3><ul><li>CPU: 2 core<li>RAM: 4GB ~ 8GB</ul></div><div class="post-tail-wrapper text-muted"><div class="post-meta mb-3"> <i class="far fa-folder-open fa-fw mr-1"></i> <a href='/categories/%EA%B0%9C%EB%B0%9C/'>개발</a></div><div class="post-tags"> <i class="fa fa-tags fa-fw mr-1"></i> <a href="/tags/elk/" class="post-tag no-text-decoration" >elk</a> <a href="/tags/elastic/" class="post-tag no-text-decoration" >elastic</a> <a href="/tags/elasticsearch/" class="post-tag no-text-decoration" >elasticsearch</a> <a href="/tags/logstash/" class="post-tag no-text-decoration" >logstash</a> <a href="/tags/kibana/" class="post-tag no-text-decoration" >kibana</a> <a href="/tags/filebeat/" class="post-tag no-text-decoration" >filebeat</a> <a href="/tags/metricbeat/" class="post-tag no-text-decoration" >metricbeat</a> <a href="/tags/heartbeat/" class="post-tag no-text-decoration" >heartbeat</a></div><div class="post-tail-bottom d-flex justify-content-between align-items-center mt-3 pt-5 pb-2"><div class="license-wrapper"> This post is licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> by the author.</div><div class="share-wrapper"> <span class="share-label text-muted mr-1">Share</span> <span class="share-icons"> <a href="https://twitter.com/intent/tweet?text=ELK Stack 설치하기 - Seomse&url=https://seomse.github.io/posts/elk-stack/" data-toggle="tooltip" data-placement="top" title="Twitter" target="_blank" rel="noopener" aria-label="Twitter"> <i class="fa-fw fab fa-twitter"></i> </a> <a href="https://www.facebook.com/sharer/sharer.php?title=ELK Stack 설치하기 - Seomse&u=https://seomse.github.io/posts/elk-stack/" data-toggle="tooltip" data-placement="top" title="Facebook" target="_blank" rel="noopener" aria-label="Facebook"> <i class="fa-fw fab fa-facebook-square"></i> </a> <a href="https://telegram.me/share?text=ELK Stack 설치하기 - Seomse&url=https://seomse.github.io/posts/elk-stack/" data-toggle="tooltip" data-placement="top" title="Telegram" target="_blank" rel="noopener" aria-label="Telegram"> <i class="fa-fw fab fa-telegram"></i> </a> <i class="fa-fw fas fa-link small" onclick="copyLink()" data-toggle="tooltip" data-placement="top" title="Copy link"></i> </span></div></div></div></div></div><div id="panel-wrapper" class="col-xl-3 pl-2 text-muted topbar-down"><div class="access"><div id="access-lastmod" class="post"> <span>Recent Update</span><ul class="post-content pl-0 pb-1 ml-1 mt-2"><li><a href="/posts/realtime-search-analysis/">리얼타임 인메모리 검색, 분석, 통계</a><li><a href="/posts/trading-auto-dev-ing/">자동매매를 개발하면서 경험한 것(주식, ETF, 선물, 비트코인)</a><li><a href="/posts/parallel-processing/">빅데이터 파일 병렬처리 플랫폼을 개발하면서</a><li><a href="/posts/elk-stack/">ELK Stack 설치하기</a><li><a href="/posts/seomse-jdbc/">seomse-jdbc 개발 배경과 활용법</a></ul></div><div id="access-tags"> <span>Trending Tags</span><div class="d-flex flex-wrap mt-3 mb-1 mr-3"> <a class="post-tag" href="/tags/macle/">macle</a> <a class="post-tag" href="/tags/java/">java</a> <a class="post-tag" href="/tags/data/">data</a> <a class="post-tag" href="/tags/etf/">ETF</a> <a class="post-tag" href="/tags/%EC%84%A0%EB%AC%BC/">선물</a> <a class="post-tag" href="/tags/%EC%A3%BC%EC%8B%9D/">주식</a> <a class="post-tag" href="/tags/file/">file</a> <a class="post-tag" href="/tags/wjrmffldrhrl/">wjrmffldrhrl</a> <a class="post-tag" href="/tags/%EB%B3%91%EB%A0%AC%EC%B2%98%EB%A6%AC/">병렬처리</a> <a class="post-tag" href="/tags/%EB%B9%84%ED%8A%B8%EC%BD%94%EC%9D%B8/">비트코인</a></div></div></div><div id="toc-wrapper" class="pl-0 pr-4 mb-5"> <span class="pl-3 pt-2 mb-2">Contents</span><nav id="toc" data-toggle="toc"></nav></div></div></div><div class="row"><div class="col-12 col-lg-11 col-xl-8"><div id="post-extend-wrapper" class="pl-1 pr-1 pl-sm-2 pr-sm-2 pl-md-4 pr-md-4"><div id="related-posts" class="mt-5 mb-2 mb-sm-4"><h3 class="pt-2 mt-1 mb-4 ml-1" data-toc-skip>Further Reading</h3><div class="card-deck mb-4"><div class="card"> <a href="/posts/java_file_fast_read_line/"><div class="card-body"> <span class="timeago small" > Jan 20 <i class="unloaded">2021-01-20T11:30:00+09:00</i> </span><h3 class="pt-0 mt-1 mb-3" data-toc-skip>java 파일 라인수 얻기, 특정라인 빨리 읽기 (빠른 라인처리)</h3><div class="text-muted small"><p> 작성자 : macle 작성자 블로그: https://macle.dev 원본경로: https://macle.dev/posts/java_file_fast_read_line/ java 빠른 라인처리 개발을 하던중 데이터 시스템을 제작할 일이 생겨서 java 로 복잡하지 않은 시스템을 만들기로 하였습니다. 아래와같이 간단한 설계를 진행하였고 ...</p></div></div></a></div><div class="card"> <a href="/posts/Java-Serialization/"><div class="card-body"> <span class="timeago small" > Jan 22 <i class="unloaded">2021-01-22T12:30:00+09:00</i> </span><h3 class="pt-0 mt-1 mb-3" data-toc-skip>Java Serialization</h3><div class="text-muted small"><p> What is Serialize? 객체 또는 데이터를 바이트 형태로 변환하는 기술 바이트로 변환된 데이터를 다시 객체로 변환하는 기술 이 두가지를 아울러서 이야기한다. How to use 기본 타입 맴버와 java.io.Serializable인터페이스를 상속받은 객체는 직렬화 할 수 있는 기본 조건을 가진다. public class ...</p></div></div></a></div><div class="card"> <a href="/posts/seomse-jdbc/"><div class="card-body"> <span class="timeago small" > Mar 25 <i class="unloaded">2021-03-25T22:30:00+09:00</i> </span><h3 class="pt-0 mt-1 mb-3" data-toc-skip>seomse-jdbc 개발 배경과 활용법</h3><div class="text-muted small"><p> 작성자 : macle 작성자 블로그: https://macle.dev 원본경로: https://macle.dev/posts/seomse-jdbc/ 개요 java 진영의 jdbc 는 jpa, Hibernate, mybatis 등 다양하게 쓸 수 있는 방법 많습니다. 관련 라이브러리를 개발한 시기는 대략 2013년 쯤으로 기억하는...</p></div></div></a></div></div></div><div class="post-navigation d-flex justify-content-between"> <a href="/posts/parallel-processing/" class="btn btn-outline-primary"><p>빅데이터 파일 병렬처리 플랫폼을 개발하면서</p></a> <a href="/posts/realtime-search-analysis/" class="btn btn-outline-primary"><p>리얼타임 인메모리 검색, 분석, 통계</p></a></div><div id="disqus" class="pt-2 pb-2"><p class="font-italic text-center text-muted small"> Comments powered by <a href="https://disqus.com/">Disqus</a>.</p></div><script src="/assets/js/lib/jquery.disqusloader.min.js"></script> <script> var options = { scriptUrl: '//https-seomse-github-io-1.disqus.com/embed.js', disqusConfig: function() { this.page.url = 'https://seomse.github.io/posts/elk-stack/'; this.page.identifier = '/posts/elk-stack/'; } }; $.disqusLoader('#disqus', options); </script></div></div></div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script> <script type="text/javascript"> const imgs = document.querySelectorAll('.post-content img'); const observer = lozad(imgs); observer.observe(); </script><footer class="d-flex w-100 justify-content-center"><div class="d-flex justify-content-between align-items-center"><div class="footer-left"><p class="mb-0"> © 2021 <a href="https://twitter.com/comseomse">seomse</a>. <span data-toggle="tooltip" data-placement="top" title="Except where otherwise noted, the blog posts on this site are licensed under the Creative Commons Attribution 4.0 International (CC BY 4.0) License by the author.">Some rights reserved.</span></p></div><div class="footer-right"><p class="mb-0"> Powered by <a href="https://jekyllrb.com" target="_blank" rel="noopener">Jekyll</a> with <a href="https://github.com/cotes2020/jekyll-theme-chirpy/" target="_blank" rel="noopener">Chirpy</a> theme.</p></div></div></footer></div><div id="search-result-wrapper" class="d-flex justify-content-center unloaded"><div class="col-12 col-xl-11 post-content"><div id="search-hints"><h4 class="text-muted mb-4">Trending Tags</h4><a class="post-tag" href="/tags/macle/">macle</a> <a class="post-tag" href="/tags/java/">java</a> <a class="post-tag" href="/tags/data/">data</a> <a class="post-tag" href="/tags/etf/">ETF</a> <a class="post-tag" href="/tags/%EC%84%A0%EB%AC%BC/">선물</a> <a class="post-tag" href="/tags/%EC%A3%BC%EC%8B%9D/">주식</a> <a class="post-tag" href="/tags/file/">file</a> <a class="post-tag" href="/tags/wjrmffldrhrl/">wjrmffldrhrl</a> <a class="post-tag" href="/tags/%EB%B3%91%EB%A0%AC%EC%B2%98%EB%A6%AC/">병렬처리</a> <a class="post-tag" href="/tags/%EB%B9%84%ED%8A%B8%EC%BD%94%EC%9D%B8/">비트코인</a></div><div id="search-results" class="d-flex flex-wrap justify-content-center text-muted mt-3"></div></div></div></div><div id="mask"></div><a id="back-to-top" href="#" aria-label="back-to-top" class="btn btn-lg btn-box-shadow" role="button"> <i class="fas fa-angle-up"></i> </a> <script src="https://cdn.jsdelivr.net/npm/simple-jekyll-search@1.7.3/dest/simple-jekyll-search.min.js"></script> <script> SimpleJekyllSearch({ searchInput: document.getElementById('search-input'), resultsContainer: document.getElementById('search-results'), json: '/assets/js/data/search.json', searchResultTemplate: '<div class="pl-1 pr-1 pl-sm-2 pr-sm-2 pl-lg-4 pr-lg-4 pl-xl-0 pr-xl-0"> <a href="https://seomse.github.io{url}">{title}</a><div class="post-meta d-flex flex-column flex-sm-row text-muted mt-1 mb-1"><div class="mr-sm-4"><i class="far fa-folder fa-fw"></i>{categories}</div><div><i class="fa fa-tag fa-fw"></i>{tags}</div></div><p>{snippet}</p></div>', noResultsText: '<p class="mt-5">Oops! No result founds.</p>' }); </script>
